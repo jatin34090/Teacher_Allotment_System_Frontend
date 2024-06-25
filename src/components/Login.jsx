@@ -9,7 +9,7 @@ const Login = () => {
     const [type, setType] = useState("user");
     const clickHandler = () => {
       console.log(email, password);
-      fetch(`${import.meta.env.VITE_APP_API_URL}api/signin`, {
+      fetch(`${import.meta.env.VITE_APP_API_URL}/api/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -26,7 +26,7 @@ const Signup = () => {
     }
 
     console.log(name, email, password, type);
-    fetch(`${import.meta.env.VITE_APP_API_URL}api/signup`, {
+    fetch(`${import.meta.env.VITE_APP_API_URL}/api/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

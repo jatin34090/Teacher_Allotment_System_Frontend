@@ -8,7 +8,7 @@ const Home = () => {
     const navigate = useNavigate();
     const [role, setRole] = useState("");
      useEffect(() => {
-          const user = JSON.parse(localStorage.getItem("user"));
+          const user = JSON.parse(localStorage.getItem("user")) || null;
           if (user) {
             if (user.type === "admin") {
               setRole("admin");

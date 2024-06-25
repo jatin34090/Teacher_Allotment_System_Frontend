@@ -10,7 +10,7 @@ const MyDuties = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("user")) || null;
     setName(user.name);
     setEmail(user.email);
     console.log(user.email);

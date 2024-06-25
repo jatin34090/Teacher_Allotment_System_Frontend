@@ -59,11 +59,13 @@ const TeacherAllotment = ({ allDate = [], detail = [] }) => {
         );
       })
     );
-    console.log(allData);
+    console.log("allData", allData);
     setDetails(allData);
+    setLoading(false);
   };
 
   const fetchDates = async () => {
+    setLoading(true);
     try {
       const response = await fetch(
         `${import.meta.env.VITE_APP_API_URL}/api/getalldate`,
@@ -80,15 +82,16 @@ const TeacherAllotment = ({ allDate = [], detail = [] }) => {
         toast.error(data.error);
       } else {
         setAllDates(data);
-        fetchShiftsForRooms(data);
+        await fetchShiftsForRooms(data);
       }
+      setLoading(false);
+
     } catch (err) {
       console.error(err.message);
     }
   };
 
   useEffect(() => {
-    setLoading(true);
     if (allDate.length > 0 && detail.length > 0) {
       setDetails(detail);
       setAllDates(allDate);
@@ -96,7 +99,6 @@ const TeacherAllotment = ({ allDate = [], detail = [] }) => {
       fetchDates();
     }
     
-    setLoading(false);
   }, []);
 
   return (

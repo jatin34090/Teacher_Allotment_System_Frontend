@@ -1,29 +1,31 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Teacher from "./Teacher";
-import { BsSearch } from "react-icons/bs";
-import { FaRegBell } from "react-icons/fa";
+
 
 import toast, { Toaster } from "react-hot-toast";
 import Headers from "../../Header/Headers";
 import Search from "../../Search/Search";
+import Loader from "../../Loader";
 const Addteacher = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [search, setSearch] = useState("");
   const [teacherCount, setteacherCount] = useState(0);
   const [allTeacher, setAllteacher] = useState([]);
+  const [loading, setLoading] = useState(true);
   //   const removeTeacher = (index) => {
   //     const filter = teacherCount.filter((_, i) => i !== index);
   //     setteacherCount(filter);
   //   };
 
-  const fetchUsers = (query) => {
+  const fetchUsers = async(query) => {
+    setLoading(true);
     setSearch(query);
     if (query.length == 0) {
       fetchAllTeacher();
     } else {
-      fetch(`${import.meta.env.VITE_APP_API_URL}/api/searchTeachers`, {
+      await fetch(`${import.meta.env.VITE_APP_API_URL}/api/searchTeachers`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,11 +49,13 @@ const Addteacher = () => {
             console.error("Expected an array but got", result);
           }
         });
+        setLoading(false);
     }
   };
 
-  const fetchAllTeacher = () => {
-    fetch(`${import.meta.env.VITE_APP_API_URL}/api/getallteachers`, {
+  const fetchAllTeacher = async() => {
+    setLoading(true);
+    await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getallteachers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -75,9 +79,11 @@ const Addteacher = () => {
       .catch((error) => {
         toast.error(error.message);
       });
+    setLoading(false);
   };
   const submitHandler = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setteacherCount((prev) => {
       prev + 1;
     });
@@ -104,6 +110,7 @@ const Addteacher = () => {
       });
     setName("");
     setEmail("");
+    setLoading(false);
   };
   useEffect(() => {
     fetchAllTeacher();
@@ -141,6 +148,7 @@ const Addteacher = () => {
         </form>
 
         <div className=" text-start m-5" style={{ scrollbarWidth: "none" }}>
+          {loading && <Loader />}
           {allTeacher ? (
             allTeacher.map((item, index) => (
               <Teacher

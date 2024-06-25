@@ -3,20 +3,23 @@ import Room from "./Room";
 import toast, { Toaster } from "react-hot-toast";
 import Headers from "../../Header/Headers";
 import Search from "../../Search/Search";
+import Loader from "../../Loader";
 
 const AddRoom = () => {
   const [roomNo, setRoomNo] = useState("");
   const [capacity, setCapacity] = useState(undefined);
   const [roomDetails, setRoomDetails] = useState([]);
-  const [allRoom, setAllRoom] = useState(null);
+  const [allRoom, setAllRoom] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
 
-  const fetchRoom = (query) => {
+  const fetchRoom = async (query) => {
     setSearch(query);
     if (query.length == 0) {
       fetchAllRoom();
     } else {
-      fetch(`${import.meta.env.VITE_APP_API_URL}/api/searchrooms`, {
+      setLoading(true);
+      await fetch(`${import.meta.env.VITE_APP_API_URL}/api/searchrooms`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,10 +43,12 @@ const AddRoom = () => {
             console.log("result", result);
           }
         });
+        setLoading(false);
     }
   };
   const fetchAllRoom = async () => {
-    fetch(`${import.meta.env.VITE_APP_API_URL}/api/getallrooms`, {
+    setLoading(true);
+     await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getallrooms`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -63,8 +68,10 @@ const AddRoom = () => {
           console.error("Expected an array but got", data);
         }
       });
+      setLoading(false);
   };
   const addRoom = async () => {
+    setLoading(true);
     fetch(`${import.meta.env.VITE_APP_API_URL}/api/addroom`, {
       method: "POST",
       headers: {
@@ -88,6 +95,7 @@ const AddRoom = () => {
         setRoomNo("");
         setCapacity("");
       });
+    setLoading(false);
   };
   useEffect(() => {
     fetchAllRoom();
@@ -103,8 +111,8 @@ const AddRoom = () => {
   return (
     <div className="admin-container">
       <Headers/>
-      
     <div className="overflow-y-scroll text-center sm:pr-5">
+      {loading && <Loader/>}
         <Search func={fetchRoom} />
       <Toaster />
       <span className="text-3xl mx-auto text-center p-3 rounded-3xl bg-white" style={{background: "rgba(0,115,225,0.1"}}>Add Rooms</span>

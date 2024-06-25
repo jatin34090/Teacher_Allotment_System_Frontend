@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
+  const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [type, setType] = useState("user");
@@ -32,9 +34,9 @@ const Login = () => {
           localStorage.setItem("user", JSON.stringify(data.teacher));
             toast.success("Successfully Logged in");
             if(type === "admin"){
-              window.location.href = "/adminhomepage";
+              navigate("/adminhomepage");
             }else{
-              window.location.href = "/myduties";
+             navigate("/myduties");
             }
           } 
         });

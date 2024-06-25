@@ -20,6 +20,8 @@ const EditTeacherAllotment = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         roomNo,
@@ -44,6 +46,8 @@ const EditTeacherAllotment = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         email,
@@ -70,6 +74,8 @@ const EditTeacherAllotment = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         email,
@@ -102,6 +108,8 @@ const EditTeacherAllotment = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         date,

@@ -79,6 +79,8 @@ const Room = ({ roomNo, capacity, initialCheckedRoom, teacherAllocated }) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         roomNo: roomNo,

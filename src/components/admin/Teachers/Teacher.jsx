@@ -91,6 +91,8 @@ const Teacher = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         email: email,
@@ -115,6 +117,8 @@ const Teacher = ({
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         email: email,

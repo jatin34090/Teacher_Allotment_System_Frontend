@@ -27,6 +27,8 @@ const Addteacher = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+
         },
         body: JSON.stringify({
           query,
@@ -53,6 +55,8 @@ const Addteacher = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
     })
       .then((res) => res.json())
@@ -81,6 +85,8 @@ const Addteacher = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("jwt"),
+
       },
       body: JSON.stringify({
         name,

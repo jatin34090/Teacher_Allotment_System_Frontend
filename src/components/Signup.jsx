@@ -18,14 +18,14 @@ const Signup = () => {
       return;
     }
     if(type === "admin"){
-      console.log(import.meta.env.VITE_APP_KEY);
+      // console.log(import.meta.env.VITE_APP_KEY);
       if(secretKey !== import.meta.env.VITE_APP_KEY){
         toast.error("Invalid Secret Key")
         return;
       }
     }
 
-    console.log(name, email, password, type);
+    // console.log(name, email, password, type);
     fetch(`${import.meta.env.VITE_APP_API_URL}/api/signup`, {
       method: "POST",
       headers: {

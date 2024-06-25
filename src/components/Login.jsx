@@ -8,7 +8,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [type, setType] = useState("user");
     const clickHandler = () => {
-      console.log(email, password);
+      // console.log(email, password);
       fetch(`${import.meta.env.VITE_APP_API_URL}/api/signin`, {
         method: "POST",
         headers: {
@@ -59,7 +59,7 @@ const Login = () => {
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
-           <select name="selectType" className="outline-none border text-xl border-gray-300 px-2 py-2 rounded-lg" onClick={(e) => setType(e.target.value)}>
+           <select className="outline-none border text-xl border-gray-300 px-2 py-2 rounded-lg" onClick={(e) => setType(e.target.value)}>
           <option value="teacher">Teacher</option>
           <option value="admin">Admin</option>
         </select>

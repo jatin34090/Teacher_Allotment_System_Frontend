@@ -1,20 +1,19 @@
-import { useState } from 'react'
+import { useEffect, useState } from "react";
 
-import './App.css'
-import { Outlet } from 'react-router-dom'
-import Headers from './components/Headers'
+import "./App.css";
+import { Outlet } from "react-router-dom";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  
 
   return (
-   <div>
-     <Headers/>
-    <main >
-      <Outlet/>
-    </main>
-   </div>
-  )
+    <div>
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

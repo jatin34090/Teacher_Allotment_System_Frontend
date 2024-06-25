@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import {RouterProvider, createBrowserRouter} from 'react-router-dom'
-import Home from './components/Home.jsx'
 import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
-import Addteacher from './components/Addteacher.jsx'
-import AddRoom from './components/AddRoom.jsx'
+import Addteacher from './components/admin/Teachers/Addteacher.jsx'
+import AddRoom from './components/admin/Rooms/AddRoom.jsx'
+import AdminHomePage from './components/admin/AdminHomePage.jsx'
+import TeacherAllotment from './components/TeacherAllotment.jsx'
+import MyDuties from './components/teachers/MyDuties.jsx'
+import Home from './components/Home.jsx'
+import AllotmentTeacher from './components/teachers/AllotmentTeacher.jsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +21,20 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>
+      },
+      {
+        path: "/allotmentTeacher",
+        element: <AllotmentTeacher/>
+      },
+      {
+        path: "/myduties",
+        element: <MyDuties/>
+      },
+
+      {
+        path: "/adminhomepage",
+        element: <AdminHomePage/>
+
       },
       {
         path: "/login",
@@ -33,7 +51,9 @@ const router = createBrowserRouter([
       {
         path: "/addroom",
         element: <AddRoom/>
-      }
+      },
+    
+
 
     ]
   }

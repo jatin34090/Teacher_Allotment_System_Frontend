@@ -132,29 +132,33 @@ const Teacher = ({
       });
   };
   return (
+    
     <div className="">
       <Toaster />
-      <div className="flex justify-center item-center bg-gray-100 p-3 border-3 mb-5 w-full">
+      <div className="flex justify-center item-center bg-white p-3 border-3 mb-5 w-full">
         <div className="w-full">
           <p>{name}</p>
           <span className="text-gray-500">{email}</span>
         </div>
 
         <button
-          className="bg-sky-400 px-6 rounded-xl py-1 mr-4"
+          className="px-6 rounded-xl transform transition-transform hover:scale-110 py-1 mr-4"
           onClick={btnClickHandler}
+          style={{background: "rgba(0,115,225,0.3"}}
         >
           Show Duties
         </button>
         <button
-          className="bg-sky-400 px-6 rounded-xl py-1 mr-4"
+          className=" px-6 rounded-xl transform transition-transform hover:scale-110 py-1 mr-4"
           onClick={leavehandler}
+          style={{background: "rgba(0,115,225,0.3"}}
         >
           {leaveStatus ? "Not Available" : "Available"}
         </button>
         <button
-          className="bg-sky-400 px-6 rounded-xl py-1"
+          className="px-6 rounded-xl transform transition-transform hover:scale-110 py-1"
           onClick={editAllotedRooms}
+          style={{background: "rgba(0,115,225,0.3"}}
         >
           Edit
         </button>
@@ -186,6 +190,7 @@ const Teacher = ({
         />
       )}
     </div>
+    
   );
 };
 

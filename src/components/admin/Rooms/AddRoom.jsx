@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Room from "./Room";
 import toast, { Toaster } from "react-hot-toast";
+import Headers from "../../Header/Headers";
+import Search from "../../Search/Search";
 
 const AddRoom = () => {
   const [roomNo, setRoomNo] = useState("");
@@ -93,12 +95,16 @@ const AddRoom = () => {
     addRoom();
   };
   return (
-    <div className=" bg-slate-500 w-2/3 m-auto py-4 px-8 mt-3 ">
+    <div className="admin-container">
+      <Headers/>
+      
+    <div className="overflow-y-scroll text-center sm:pr-5">
+        <Search func={fetchRoom} />
       <Toaster />
-      <h1>Add Rooms</h1>
-      <form className="flex flex-col gap-5" onSubmit={submitHandler}>
+      <span className="text-3xl mx-auto text-center p-3 rounded-3xl bg-white" style={{background: "rgba(0,115,225,0.1"}}>Add Rooms</span>
+      <form className="flex flex-col m-5 gap-5" onSubmit={submitHandler}>
         <input
-          className="p-2"
+          className="p-2 outline-none"
           type="number"
           placeholder="Enter Room Number"
           value={roomNo}
@@ -106,30 +112,21 @@ const AddRoom = () => {
           required
         />
         <input
-          className="p-2"
+          className="p-2 outline-none"
           type="number"
           placeholder="Enter Room Capicity"
           value={capacity}
           onChange={(e) => setCapacity(e.target.value)}
           required
         ></input>
-        <button className="bg-sky-400 p-2" type="submit">
+        <button className=" p-4 m-auto rounded-2xl w-full md:w-1/3 lg:w-1/6" style={{background: "rgba(0,115,225,0.2"}} type="submit">
           ADD
         </button>
 
-        <div className=" flex justify-center mt-6 mb-2 h-10 ">
-          <input
-            className=" text-center"
-            style={{ color: "black" }}
-            type="text"
-            placeholder="search"
-            value={search}
-            onChange={(e) => fetchRoom(e.target.value)}
-          />
-        </div>
+      
       </form>
       <div
-        className="overflow-y-scroll max-h-80"
+        className="text-start m-5"
         style={{ scrollbarWidth: "none" }}
       >
         {allRoom ? (
@@ -146,6 +143,7 @@ const AddRoom = () => {
           <h1>No Room found</h1>
         )}
       </div>
+    </div>
     </div>
   );
 };

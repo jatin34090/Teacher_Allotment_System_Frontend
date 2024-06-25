@@ -96,12 +96,12 @@ const Room = ({ roomNo, capacity, initialCheckedRoom, teacherAllocated }) => {
   };
   return (
     <div>
-      <div className="flex justify-center item-center bg-gray-100 p-3 border-3 mb-5">
+      <div className="flex justify-center item-center bg-white p-3 border-3 mb-5">
         <div className="w-full">
           <p>{roomNo}</p>
           <span className="text-gray-500">{capacity}</span>
         </div>
-        <button className="bg-sky-400 w-40 m-2" onClick={btnClickHandler}>
+        <button className="px-6 rounded-xl transform transition-transform hover:scale-110 py-1 mr-4" style={{background: "rgba(0,115,225,0.3"}} onClick={btnClickHandler}>
           Show Allotment
         </button>
         {initialCheckedRoom != undefined && (

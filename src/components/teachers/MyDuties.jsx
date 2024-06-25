@@ -24,6 +24,7 @@ const MyDuties = () => {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("jwt"),
           },
           body: JSON.stringify({ email }),
         }
@@ -55,7 +56,7 @@ const MyDuties = () => {
                 <th className="border border-gray-300 md:px-4 py-2">Room</th>
                 <th className="border border-gray-300 md:px-4 py-2">Shift</th>
                 <th className="border border-gray-300 md:px-4 py-2">Date</th>
-                <th className="border border-gray-300 md:px-4 py-2">Teacher</th>
+                {/* <th className="border border-gray-300 md:px-4 py-2">Teacher</th> */}
               </tr>
             </thead>
             <tbody>
@@ -70,9 +71,9 @@ const MyDuties = () => {
                   <td className="border border-gray-300 px-4 py-2">
                     {duty.date}
                   </td>
-                  <td className="border border-gray-300 px-4 py-2">
+                  {/* <td className="border border-gray-300 px-4 py-2">
                     {duty.teacher}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>

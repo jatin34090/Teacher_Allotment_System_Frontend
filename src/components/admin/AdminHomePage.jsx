@@ -8,6 +8,10 @@ const AdminHomePage = () => {
   const [date, setDate] = useState("");
   const [examDates, setExamDates] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [details, setDetails] = useState({});
+
+  const [allDates, setAllDates] = useState([]);
+
 
   const allotment = async () => {
     try {
@@ -15,6 +19,7 @@ const AdminHomePage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
         body: JSON.stringify({ date }),
       });
@@ -47,6 +52,9 @@ const AdminHomePage = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+
+          
         },
         body: JSON.stringify({ query }),
       });
@@ -64,6 +72,7 @@ const AdminHomePage = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
         },
       });
       const data = await responce.json();
@@ -74,6 +83,69 @@ const AdminHomePage = () => {
       console.error(err.message);
     }
   };
+  const getRooms = async (shiftId) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getRooms/${shiftId}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      });
+      const jsonData = await response.json();
+      if(jsonData.error) {
+        toast.error(jsonData.error);
+      }
+      return jsonData;
+    } catch (err) {
+      console.error(err.message);
+      return null;
+    }
+  };
+
+  const fetchShiftsForRooms = async (data) => {
+    const allData = {};
+    await Promise.all(
+      data.map(async (examdate, index) => {
+        allData[index] = await Promise.all(
+          examdate.rooms.map((shiftId) => getRooms(shiftId))
+        );
+      })
+    );
+    console.log(allData);
+    setDetails(allData);
+  };
+  const fetchDates = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_APP_API_URL}/api/getalldate`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("jwt"),
+        },
+      });
+      const data = await response.json();
+      if(data.error) {
+        toast.error(data.error);
+      }else{
+        setAllDates(data);
+        fetchShiftsForRooms(data);
+
+      }
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+
+
+
+  useEffect(() => {
+    setLoading(true);
+    fetchDates();
+    fetchExamDates();
+setLoading(false);
+  }, []);
 
   useEffect(() => {
     if (date) {
@@ -82,12 +154,7 @@ const AdminHomePage = () => {
       setLoading(false);
     }
   }, [date]);
-  useEffect(() => {
-    setLoading(true);
-    fetchExamDates();
-setLoading(false);
-  }, []);
-
+ 
   return (
     <div
       className="admin-container"
@@ -120,7 +187,7 @@ setLoading(false);
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
-      <TeacherAllotment />
+      <TeacherAllotment allDate={allDates} detail={details} />
       </div>
     </div>
   );

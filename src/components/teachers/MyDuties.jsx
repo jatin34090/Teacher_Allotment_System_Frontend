@@ -30,6 +30,10 @@ const MyDuties = () => {
         }
       );
       const jsonData = await response.json();
+      if(jsonData.error) {
+        toast.error(jsonData.error);
+        return;
+      }
       console.log("MyDuties", jsonData);
 
       setMyDuties(jsonData);
@@ -44,7 +48,7 @@ const MyDuties = () => {
     <div className="admin-container">
       <Headers />
 
-     {loading ? <Loader/> : (<div className="flex flex-col items-center pt-10 sm:pr-5 overflow-y-scroll">
+     {loading ? <Loader/> : (<div className="flex text-center flex-col items-center pt-10 sm:pr-5 overflow-y-scroll">
         <div className="sm:text-xl bg-sky-100 w-full text-center p-4 font-bold mb-4">Name  : <span className="sm:text-xl text-sky-400 w-full text-center p-4 font-bold mb-4">{name}</span> </div>
         <div className="sm:text-xl bg-sky-100 w-full text-center p-4 font-bold mb-4">Email  : <span className="sm:text-xl text-sky-400 w-full text-center p-4 font-bold mb-4"> {email} </span></div>
         <div className="sm:text-xl bg-red-300 w-full text-center p-4 font-bold ">My Duties</div>

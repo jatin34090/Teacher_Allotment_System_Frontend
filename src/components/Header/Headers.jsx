@@ -27,7 +27,7 @@ const renderList = () => {
 
   if (type === "admin") {
     return [
-      <Li url={"/adminhomepage"} text={"Alloted Teacher"} key={1}></Li>,
+      <Li url={"/teacherAllotment"} text={"Alloted Teacher"} key={1}></Li>,
       <Li url={"/addteacher"} text={"Add Teacher"} key={2}></Li>,
       <Li url={"/addroom"} text={"Add Room"} key={3}>
       </Li>,
@@ -43,7 +43,7 @@ const renderList = () => {
   } else if (type === "teacher") {
     return [
       <Li url={"/myduties"} text={" My Duties"} key={1}></Li>,
-      <Li url={"/allotmentTeacher"} text={"Alloted Teacher"} key={2}></Li>,
+      <Li url={"/teacherAllotment"} text={"Alloted Teacher"} key={2}></Li>,
       <li key={3}>
         <button
           onClick={() => logoutClickHandler()}

@@ -48,12 +48,8 @@ const Signup = () => {
           localStorage.setItem("jwt", data.authToken);
           localStorage.setItem("user", JSON.stringify(data.teacher));
           toast.success("Successfully Signed up");
-          if(type === "admin"){
-            navigate("/adminHomePage");
-          }else{
-            navigate("/");
-            
-          }
+          navigate("/teacherAllotment");
+          
         }
       });
 
@@ -85,7 +81,7 @@ const Signup = () => {
           type="password"
           placeholder="Password"
         />
-        <select name="selectType" className="outline-none border text-xl border-gray-300 px-2 py-2 rounded-lg" onClick={(e) => setType(e.target.value)}>
+        <select className="outline-none border text-xl border-gray-300 px-2 py-2 rounded-lg" onClick={(e) => setType(e.target.value)}>
           <option value="teacher">Teacher</option>
           <option value="admin">Admin</option>
         </select>

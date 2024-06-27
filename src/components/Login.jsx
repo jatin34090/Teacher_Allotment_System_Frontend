@@ -33,11 +33,8 @@ const Login = () => {
             localStorage.setItem("jwt", data.authToken);
           localStorage.setItem("user", JSON.stringify(data.teacher));
             toast.success("Successfully Logged in");
-            if(type === "admin"){
-              navigate("/adminhomepage");
-            }else{
-             navigate("/myduties");
-            }
+            navigate("/teacherAllotment");
+            
           } 
         });
     }

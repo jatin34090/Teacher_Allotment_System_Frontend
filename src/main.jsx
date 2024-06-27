@@ -7,10 +7,9 @@ import Login from './components/Login.jsx'
 import Signup from './components/Signup.jsx'
 import Addteacher from './components/admin/Teachers/Addteacher.jsx'
 import AddRoom from './components/admin/Rooms/AddRoom.jsx'
-import AdminHomePage from './components/admin/AdminHomePage.jsx'
 import MyDuties from './components/teachers/MyDuties.jsx'
 import Home from './components/Home.jsx'
-import AllotmentTeacher from './components/teachers/AllotmentTeacher.jsx'
+import TeacherAllotment from './components/TeacherAllotment.jsx'
 
 const router = createBrowserRouter([
   {
@@ -22,19 +21,14 @@ const router = createBrowserRouter([
         element: <Home/>
       },
       {
-        path: "/allotmentTeacher",
-        element: <AllotmentTeacher/>
+        path: "/teacherAllotment",
+        element: <TeacherAllotment/>
       },
       {
         path: "/myduties",
         element: <MyDuties/>
       },
-
-      {
-        path: "/adminhomepage",
-        element: <AdminHomePage/>
-
-      },
+    
       {
         path: "/login",
         element: <Login/>

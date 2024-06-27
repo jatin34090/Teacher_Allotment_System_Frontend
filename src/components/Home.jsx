@@ -1,29 +1,19 @@
 import React, { useState,useEffect } from 'react'
 import { useNavigate } from "react-router-dom";
-import MyDuties from './teachers/MyDuties';
 
-import AdminHomePage from './admin/AdminHomePage';
 
 const Home = () => {
     const navigate = useNavigate();
-    const [role, setRole] = useState("");
+    // const [role, setRole] = useState("");
      useEffect(() => {
           const user = JSON.parse(localStorage.getItem("user")) || null;
           if (user) {
-            if (user.type === "admin") {
-              setRole("admin");
-            }else{
-              setRole("teacher");
-            }
+           navigate("/teacherAllotment")
           } else {
             navigate("/login");
           }
-        },[]);
-  return (
-    <>
-    {role==="admin"?<AdminHomePage/>:<MyDuties/>}
-    </>
-  )
+        },[navigate]);
+  return null;
 }
 
 export default Home
